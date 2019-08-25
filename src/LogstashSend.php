@@ -11,6 +11,7 @@ namespace mitrm\logstash;
 use mitrm\logstash\transport\TransportInterface;
 use Yii;
 use yii\base\Component;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class LogstashSend
@@ -29,6 +30,12 @@ class LogstashSend extends Component
 
 
     /**
+     * @var array
+     */
+    public $addParams = [];
+
+
+    /**
      * @throws \yii\base\InvalidConfigException
      */
     public function init()
@@ -44,6 +51,9 @@ class LogstashSend extends Component
      */
     public function sendLog($data)
     {
+        if (is_array($data) && !empty($this->addParams) && is_array($this->addParams)) {
+            $data = ArrayHelper::merge($data, $this->addParams);
+        }
         $this->sender->send($data);
     }
 
