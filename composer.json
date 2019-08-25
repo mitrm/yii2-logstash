@@ -1,0 +1,24 @@
+{
+    "name": "mitrm/yii2-logstash",
+    "description": "Отправка данных в Logstash",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","logstash","kibana","elasticsearch","elk","log","target","tcp"],
+    "homepage": "https://github.com/mitrm/yii2-logstash",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ruslan Miskevich",
+            "email": "ruslantm.ru@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "mitrm\\logstash\\": "src"
+        }
+    }
+}
