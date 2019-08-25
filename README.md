@@ -42,7 +42,7 @@ Usage
         'logstash' => [
             'class' => \mitrm\logstash\LogstashSend::class,
             'config' => [
-                'class' => \mitrm\logstash\adapter\HttpTransport::class,
+                'class' => \mitrm\logstash\transport\HttpTransport::class,
                 'port' => 5001,
                 'host' => 'http://localhost'
             ],
