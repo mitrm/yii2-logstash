@@ -30,7 +30,7 @@ class HttpTransport implements TransportInterface
     /**
      * @var int
      */
-    public $port = 80;
+    public $port;
 
     /**
      * @inheritdoc
@@ -41,17 +41,20 @@ class HttpTransport implements TransportInterface
         if (is_array($data)) {
             $data = json_encode($data, JSON_UNESCAPED_UNICODE);
         }
-        curl_setopt_array($curl, [
-            CURLOPT_PORT => $this->port,
+        $config = [
             CURLOPT_URL => $this->host,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
+            CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => $this->timeout,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_CUSTOMREQUEST => 'POST',
             CURLOPT_POSTFIELDS => $data,
-        ]);
+        ];
+        if ($this->port) {
+            $config[CURLOPT_PORT] = $this->port;
+        }
+        curl_setopt_array($curl, $config);
         curl_exec($curl);
         $err = curl_error($curl);
         curl_close($curl);
